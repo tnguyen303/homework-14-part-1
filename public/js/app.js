@@ -12,13 +12,24 @@ $("#moment-year").append(year);
 /////////-----UTILITY FUNCTIONS-----/////////////
 const render = function(outputElement, dataList) {
   dataList.forEach(e => {
-    $(outputElement).append(`
-            <div id='item-${e._id}' class="toDoItem">
-            <span class='todo'>${e.task}</span>
-            <a href="#"><span id="deleteBtn-${
-              e._id
-            }" class="finish far fa-circle fa-lg" value='${e._id}'></span></a>
-            </div>`);
+    if(!e.done){
+      $(outputElement).append(`
+      <div id='item-${e._id}' class="toDoItem">
+      <span class='todo'>${e.task}</span>
+      <a href="#"><span id="deleteBtn-${
+        e._id
+      }" class="finish far fa-circle fa-lg" value='${e._id}'></span></a>
+      </div>`);
+    } else{
+      $(outputElement).append(`
+      <div id='item-${e._id}' class="toDoItem opacity">
+      <span class='todo'>${e.task}</span>
+      <a href="#"><span id="deleteBtn-${
+        e._id
+      }" class="delete far fa-times-circle fa-lg" value='${e._id}'></span></a>
+      </div>`);
+    }
+
   });
 };
 
