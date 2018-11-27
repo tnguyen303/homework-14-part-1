@@ -3,7 +3,6 @@ const app = express();
 //http package lets you run server without Express, socket.io requires more control that is provided with this package
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
 const db = require("./models");
 const bodyParser = require("body-parser");
@@ -23,13 +22,6 @@ require("./routes/api-routes")(app);
 
 server.listen(PORT, function() {
   console.log(`Server listening on PORT ${PORT}`);
-});
-
-// Starts the server to begin listening
-db.sequelize.sync({ force: true }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
 });
 
 const client = new Client({
