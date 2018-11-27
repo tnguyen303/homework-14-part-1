@@ -1,35 +1,27 @@
 const socket = io();
 
-//use moment.js to get current day, date, year, time
-const dayDateYearTime = moment().format("llll");
-const day = dayDateYearTime.slice(0, 3).toUpperCase();
-const date = dayDateYearTime.slice(5, 11).toUpperCase();
-const year = dayDateYearTime.slice(13, 17);
-$("#moment-day").append(day);
-$("#moment-date").append(date);
-$("#moment-year").append(year);
-
 /////////-----UTILITY FUNCTIONS-----/////////////
 const render = function(outputElement, dataList) {
   dataList.forEach(e => {
-    if(!e.done){
+    if (!e.done) {
       $(outputElement).append(`
-      <div id='item-${e._id}' class="toDoItem">
-      <span class='todo'>${e.task}</span>
-      <a href="#"><span id="deleteBtn-${
+      <div id='item-${
         e._id
-      }" class="finish far fa-circle fa-lg" value='${e._id}'></span></a>
+      }' class="toDoItem"><a href="#"><span id="deleteBtn-${
+        e._id
+      }" class="finish far fa-circle fa-xs" value='${e._id}'></span></a>
+      <span class='todo'>${e.task}</span><hr>
       </div>`);
-    } else{
+    } else {
       $(outputElement).append(`
-      <div id='item-${e._id}' class="toDoItem opacity">
-      <span class='todo'>${e.task}</span>
-      <a href="#"><span id="deleteBtn-${
+      <div id='item-${
         e._id
-      }" class="delete far fa-times-circle fa-lg" value='${e._id}'></span></a>
+      }' class="toDoItem opacity"><a href="#"><span id="deleteBtn-${
+        e._id
+      }" class="delete far fa-dot-circle fa-xs" value='${e._id}'></span></a>
+      <span class='todo'>${e.task}</span><hr>
       </div>`);
     }
-
   });
 };
 
@@ -95,7 +87,7 @@ socket.on("emit-finish", function(data) {
   $(`#item-${data}`).toggleClass("opacity");
   $(`#deleteBtn-${data}`)
     .toggleClass("fa-circle")
-    .toggleClass("fa-times-circle")
+    .toggleClass("fa-dot-circle")
     .toggleClass("finish")
     .toggleClass("delete");
 });

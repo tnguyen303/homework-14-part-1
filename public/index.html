@@ -24,22 +24,27 @@
   </head>
 
   <body>
+    <div id="left-pane">
+      <div id="left-pane-text">
+        <div>Tri's</div>
+        <div style="font-weight: bold">TO DO LIST</div>
+      </div>
+    </div>
     <main>
-      <div id='moment-day'></div>
-      <div id='moment-date'></div>
-      <div id='moment-year'></div>
-      <form id='submit-form'>
-        <input id="newInput" type="text" placeholder=""/>
+      <div id="moment-day"></div>
+      <div id="moment-date"></div>
+      <div id="moment-year"></div>
+      <form id="submit-form">
+        <input id="newInput" type="text" placeholder="New to do" />
       </form>
       <div id="content"></div>
-      <script src="js/moment.js"></script>
       <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script src="js/app.js"></script>
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"
+      ></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+      <script src="js/app.js"></script>
     </main>
   </body>
 </html>
