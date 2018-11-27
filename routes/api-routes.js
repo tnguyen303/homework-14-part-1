@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
-const db = require("../models/Todolist");
+const db = require("../models");
 
 module.exports = function(app) {
   app.get("/api/todolist", function(req, res) {
-    db.find({})
+    db.Todo.findAll({})
       .then(function(list) {
         res.json(list);
       })
@@ -13,8 +12,7 @@ module.exports = function(app) {
   });
 
   app.post("/api/todolist", function(req, res) {
-    new db(req.body)
-      .save()
+    db.Todo.create(req.body)
       .then(function(data) {
         res.json(data);
       })
@@ -23,22 +21,33 @@ module.exports = function(app) {
       });
   });
 
-  app.put('/api/todolist/:taskQuery', function(req,res){
-    db.findOneAndUpdate({_id: req.params.taskQuery}, {$set: {done: true}}).then(function(data){
-      res.json(data);
-    })
-    .catch(function(err){
-      res.json(err);
-    })
-  });
-
-  app.delete("/api/todolist/:taskQuery", function(req, res) {
-    db.remove({ _id: req.params.taskQuery })
-      .then(function() {
-        res.json(db);
+  app.put("/api/todolist/:taskQuery", function(req, res) {
+    db.Todo.update(
+      { done: true },
+      {
+        where: {
+          id: req.params.taskQuery
+        }
+      }
+    ).then(function(data) {
+        res.json(data);
       })
       .catch(function(err) {
         res.json(err);
+      });
+  });
+
+  app.delete("/api/todolist/:taskQuery", function(req, res) {
+    db.Todo.destroy({
+      where: {
+        id: req.params.taskQuery
+      }
+    })
+      .then(function() {
+        res.json({ success: true });
+      })
+      .catch(function(err) {
+        res.json({ success: false });
       });
   });
 };
