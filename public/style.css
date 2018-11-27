@@ -3,7 +3,7 @@ body{
     background-image: url('../images/waterfall.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: 1fr 270px;
     display: grid;
     font-family: 'Roboto', sans-serif;
 }
