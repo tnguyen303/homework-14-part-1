@@ -6,7 +6,6 @@ const io = require("socket.io")(server);
 const PORT = process.env.PORT || 3000;
 const db = require("./models");
 const bodyParser = require("body-parser");
-const { Client } = require('pg');
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -24,20 +23,10 @@ server.listen(PORT, function() {
   console.log(`Server listening on PORT ${PORT}`);
 });
 
-const client = new Client({
-  connectionString: "postgres://nawejhzthcupab:514297fa0de16a12e47c4f58e7b1fb5831237317b12849844499e81d537b4381@ec2-23-21-201-12.compute-1.amazonaws.com:5432/dbfm99geb942eu" 
-  // ||
-  // "dbname=dbfm99geb942eu host=ec2-23-21-201-12.compute-1.amazonaws.com port=5432 user=nawejhzthcupab password=514297fa0de16a12e47c4f58e7b1fb5831237317b12849844499e81d537b4381 sslmode=require"
-  ,
-  ssl: true,
-});
-
-client.connect();
-
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});
+db.sequelize.sync().then(function() {
+  server.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
+ }).catch(function(err) {
+  console.log('An error occurred');
+ });
