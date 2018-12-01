@@ -37,7 +37,6 @@ getTodoList();
 /////////-----EVENT LISTENERS-----/////////////
 $("#submit-form").on("submit", function(event) {
   event.preventDefault();
-  //display in front-end make an array of 1 element
   const newInput = {
     task: $("#newInput")
       .val()
@@ -49,10 +48,10 @@ $("#submit-form").on("submit", function(event) {
     function(data) {
       if (data) {
         $("#newInput").val("");
-        //send to all sockets
         const dataList = [data];
         socket.emit("add-todo", dataList);
       } else {
+        console.log('Enter a unique input');
         alert("Enter a unique input");
       }
     }

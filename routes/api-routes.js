@@ -17,7 +17,7 @@ module.exports = function(app) {
         res.json(data);
       })
       .catch(function(err) {
-        res.json(err);
+        res.ok;
       });
   });
 
