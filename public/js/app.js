@@ -6,19 +6,19 @@ const render = function(outputElement, dataList) {
     if (!e.done) {
       $(outputElement).append(`
       <div id='item-${
-        e._id
+        e.id
       }' class="toDoItem"><a href="#"><span id="deleteBtn-${
-        e._id
-      }" class="finish far fa-circle fa-xs" value='${e._id}'></span></a>
+        e.id
+      }" class="finish far fa-circle fa-xs" value='${e.id}'></span></a>
       <span class='todo'>${e.task}</span><hr>
       </div>`);
     } else {
       $(outputElement).append(`
       <div id='item-${
-        e._id
+        e.id
       }' class="toDoItem opacity"><a href="#"><span id="deleteBtn-${
-        e._id
-      }" class="delete far fa-dot-circle fa-xs" value='${e._id}'></span></a>
+        e.id
+      }" class="delete far fa-dot-circle fa-xs" value='${e.id}'></span></a>
       <span class='todo'>${e.task}</span><hr>
       </div>`);
     }
